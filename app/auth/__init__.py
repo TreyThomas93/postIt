@@ -18,7 +18,6 @@ def load_user(user_id):
 @authorize.route("/login", methods=["POST", "GET"])
 def login():
     msg = None
-    db.create_all()
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
@@ -27,11 +26,10 @@ def login():
             if password == user.password:
                 login_user(user)
                 return redirect(url_for("home.index"))
-
-        else:
-            msg = "Invalid Username and/or Password."
-            flash(msg, "danger")
-            return render_template("auth/login.html")
+                
+        msg = "Invalid Username and/or Password."
+        flash(msg, "danger")
+        return render_template("auth/login.html")
     else:
         msg = request.args.get("msg")
         flash(msg, "success")
