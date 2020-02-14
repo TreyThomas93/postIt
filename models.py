@@ -6,7 +6,7 @@ from app import app
 class Users(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True)
-    password = db.Column(db.String(20))
+    password = db.Column(db.LargeBinary)
     email = db.Column(db.String(20))
     posts = db.relationship("Posts", backref="poster", lazy="dynamic")
 

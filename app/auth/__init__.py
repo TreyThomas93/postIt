@@ -2,6 +2,7 @@ from extensions import db, login_manager, mail
 from flask_login import login_required, current_user, login_user, logout_user
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_mail import Message
+import bcrypt
 from models import Users
 
 authorize = Blueprint("authorize", __name__, template_folder="templates", static_folder="static", static_url_path="/auth/static")
@@ -18,12 +19,13 @@ def load_user(user_id):
 @authorize.route("/login", methods=["POST", "GET"])
 def login():
     msg = None
+    db.create_all()
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
         user = Users.query.filter_by(username=username).first()
         if user:
-            if password == user.password:
+            if bcrypt.hashpw(password.encode('utf-8'), user.password):
                 login_user(user)
                 return redirect(url_for("home.index"))
                 
@@ -54,7 +56,7 @@ def register():
             email_exists = Users.query.filter_by(email=email).first()
             if not username_exists and not email_exists:
                 if password == confirm_password:
-                    add = Users(username=username, password=password, email=email)
+                    add = Users(username=username, password=bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()), email=email)
                     db.session.add(add)
                     db.session.commit()
                     flash("Thanks For Registering! Please Login!", "success")
