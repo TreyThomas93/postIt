@@ -34,7 +34,11 @@ Simple pseudo CRUD app that allows the user to create, read, update, and delete 
 [Flask Blueprint]
 [Flask Login]
 [Flask Mail]
+
+<b>Stylesheet: </b>
 [Bootstrap]
+
+<b>Database: </b>
 [SQLite3]
 
 
