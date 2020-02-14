@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('includes.static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('includes.static', filename='css/layout.css') }}">
+    {% block head %}
+    <!-- title and link to stylesheet added dynamically -->
+    {% endblock %}
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="/">postIt</a>
+
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    {% block nav %}
+                    <!-- nav anchors added dynamically -->
+                    {% endblock %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- FLASH MESSAGES -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    {% if message != None %}
+    <div class="alert alert-dismissible alert-{{ category }}">
+        <label class="mb-1">{{ message }}</label>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    {% block content %}
+    <!-- main page content added dynamically -->
+    {% endblock %}
+
+    <footer>
+        <label for="" class="mb-1">Version 1.0.1</label>
+    </footer>
+
+    <script src="{{ url_for('includes.static', filename='js/jquery.js') }}"></script>
+</body>
+
+</html>

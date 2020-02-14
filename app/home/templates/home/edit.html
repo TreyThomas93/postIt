@@ -1,0 +1,33 @@
+{% extends "includes/layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('.static', filename='css/edit.css') }}">
+<title>Edit Post</title>
+{% endblock %}
+
+{% block nav %}
+<li class="nav-item">
+    <a class="nav-link" href="/logout">Logout</a>
+</li>
+{% endblock %}
+
+{% block content %}
+<section>
+    <!-- EDIT POST -->
+    <div class="edit-post">
+        <div class="top-edit-post-div">
+            <h3>Edit Post</h3>
+            <label for="" class="mb-1">Welcome, {{ current_user.username }}</label>
+        </div>
+        <form action="/edit_post" , method="POST">
+            <fieldset>
+                <div class="form-group">
+                    <input type="hidden" name="id" value="{{ id }}">
+                    <textarea class="form-control" id="exampleTextarea" rows="3" name="post">{{ post }}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </fieldset>
+        </form>
+    </div>
+</section>
+{% endblock %}

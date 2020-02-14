@@ -1,0 +1,22 @@
+section {
+  width: 50%;
+  margin: auto;
+}
+
+section > div {
+  margin-top: 1em;
+  -webkit-box-shadow: 0 0 10px rgba(1, 1, 1, 0.5);
+          box-shadow: 0 0 10px rgba(1, 1, 1, 0.5);
+  padding: 1em;
+  border-radius: 10px;
+}
+
+section .edit-post .top-edit-post-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+/*# sourceMappingURL=edit.css.map */

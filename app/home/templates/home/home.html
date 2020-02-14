@@ -1,0 +1,56 @@
+{% extends "includes/layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('home.static', filename='css/home.css') }}">
+<title>Home</title>
+{% endblock %}
+
+{% block nav %}
+<li class="nav-item">
+    <a class="nav-link" href="/logout">Logout</a>
+</li>
+{% endblock %}
+
+{% block content %}
+<section>
+    <!-- CREATE POST -->
+    <div class="create-post">
+        <div class="top-create-post-div">
+            <h3>Create Post</h3>
+            <label for="" class="mb-1">Welcome, {{ current_user.username }}</label>
+        </div>
+        <form action="/create_post", method="POST">
+            <fieldset>
+                <div class="form-group">
+                    <textarea class="form-control" id="exampleTextarea" rows="3"
+                        name="post" placeholder="Write Something..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </fieldset>
+        </form>
+    </div>
+
+    <!-- VIEW ALL POSTS -->
+    <div class="view-posts">
+        <h3>Posts</h3>
+        <div class="list-group">
+            {% for post in posts %}
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <label class="mb-1">{{ post.poster.username }}</label>
+                    <small>{{ post.posted_at }}</small>
+                </div>
+                <small class="">{{ post.post }}</small>
+                {% if post.poster.username == current_user.username %}
+                <div class="edit-delete-div" style="display: flex; float: right;">
+                    <form action="/delete_post" method="POST"><input type="hidden" name="id" value="{{ post.id }}"><button class="btn btn-danger" type="submit" title="Delete Post">Delete</button></form>
+
+                    <form action="/edit_post" method="GET"><input type="hidden" name="id" value="{{ post.id }}"><input type="hidden" name="post" value="{{ post.post }}"><button class="btn btn-secondary" type="submit" title="Delete Post">Edit</button></form>
+                </div>
+                {% endif %}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

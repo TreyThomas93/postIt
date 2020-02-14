@@ -1,0 +1,30 @@
+{% extends "includes/layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('.static', filename='css/login.css') }}">
+<title>Login</title>
+{% endblock %}
+
+{% block content %}
+<!-- LOGIN FORM -->
+<form action="/login" method="POST">
+    <h3>Login</h3>
+    <fieldset>
+        <div class="form-group">
+            <label>Username</label>
+            <input type="username" class="form-control" name="username" placeholder="Enter Username">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" name="password" placeholder="Enter Password">
+        </div>
+        <div class="bottom-login-form-div">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <div>
+                <a class="nav-link" href="/register">Register</a>
+                <a class="nav-link" href="/forgot_password">Forgot Password</a>
+            </div>
+        </div>
+    </fieldset>
+</form>
+{% endblock %}
