@@ -11,5 +11,5 @@ SQLALCHEMY_BINDS = ({"Posts" : f"sqlite:///{os.getcwd()}/postIt.db"})
 MAIL_SERVER = "smtp.googlemail.com"
 MAIL_PORT = 587
 MAIL_USE_TLS = True
-MAIL_USERNAME = "*********" # use your own email address here
-MAIL_PASSWORD = "*********" # use your own email password here
+# MAIL_USERNAME = "*********" # use your own email address here
+# MAIL_PASSWORD = "*********" # use your own email password here

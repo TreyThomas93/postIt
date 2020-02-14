@@ -121,7 +121,7 @@ def reset_password():
             user = Users.query.filter_by(email=email).first()
             if user:
                 if new_password == confirm_new_password:
-                    user.password = new_password
+                    user.password = bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt())
                     db.session.commit()
                     flash("Your password has been updated! You can now login!", "info")
                     return render_template("auth/login.html")
