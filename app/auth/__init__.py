@@ -4,6 +4,7 @@ from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_mail import Message
 import bcrypt
 from models import Users
+import os
 
 authorize = Blueprint("authorize", __name__, template_folder="templates", static_folder="static", static_url_path="/auth/static")
 
@@ -19,7 +20,6 @@ def load_user(user_id):
 @authorize.route("/login", methods=["POST", "GET"])
 def login():
     msg = None
-    db.create_all()
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
